@@ -1,1 +1,112 @@
-iijp
+# VotaStellar 🗳️
+
+> **Hackathon:** Open Innovation using Scaffold Stellar (DoraHacks)
+> **Trilha (Eixo):** Inovação Aberta (Open Innovation) / Bem Social & Comunidade (Social Good & Community)
+
+`VotaStellar` é uma Aplicação Descentralizada (dApp) de votação e enquete, totalmente on-chain, construída na rede Stellar (Soroban).
+
+Nosso projeto oferece uma ferramenta de governança simples, transparente e resistente a robôs, permitindo que comunidades realizem votações onde a regra de negócio "1 carteira, 1 voto" é garantida e fiscalizada pelo próprio contrato inteligente.
+
+## 🚀 Links da Demonstração
+
+* **dApp Ao Vivo:** `[COLE A URL DO SEU DEPLOY NA VERCEL/NETLIFY AQUI]`
+* **Vídeo de Demonstração (Pitch):** `[COLE A URL DO SEU VÍDEO NO YOUTUBE/LOOM AQUI]`
+* **ID do Contrato (Testnet):** `[COLE O ID DO SEU CONTRATO PUBLICADO AQUI]`
+
+---
+
+## 🏆 Como Atendemos aos Critérios do Hackathon
+
+O objetivo deste projeto foi demonstrar a **velocidade e eficiência** do framework Scaffold Stellar. Em vez de focar em complexidade, focamos em entregar um dApp 100% funcional, provando o ciclo completo de interação (Leitura, Escrita e Autenticação) que o scaffold facilita.
+
+Nosso dApp é construído sobre os 3 pilares exigidos pelo desafio:
+
+### 1. Um Contrato Inteligente Implantado (Rust/Wasm)
+
+O "cérebro" da aplicação. O contrato em `/contracts` não é apenas um banco de dados; ele é o fiscal que aplica ativamente as regras.
+
+* **Armazenamento:** O contrato usa dois `Map`s principais:
+    1.  `VOTES`: Armazena a contagem de votos para cada opção (`Map<Symbol, u64>`).
+    2.  `VOTERS`: Armazena quais carteiras já votaram (`Map<Address, bool>`).
+* **Funções Principais:**
+    * `vote(option: Symbol)`: A função de *escrita*. Ela primeiro identifica o chamador (`env.invoker()`), verifica no `Map` `VOTERS` se ele já votou. Se sim, reverte a transação com um erro. Se não, registra o voto e marca o endereço como "já votou".
+    * `get_results()`: A função de *leitura* pública que retorna o mapa `VOTES`, permitindo que o front-end exiba os resultados.
+
+### 2. Um Front-end Funcional (React/Vite)
+
+A "cabine de votação" do usuário. Usamos o template TypeScript + React + Vite do Scaffold Stellar para criar uma interface limpa.
+
+* **Leitura de Dados:** A UI chama a função `get_results()` do contrato (usando os hooks `useContractRead` providos pelo scaffold) e exibe os resultados da votação em tempo real.
+* **Escrita de Dados:** A UI apresenta os botões para o usuário selecionar sua opção de voto.
+
+### 3. Integração com o Stellar Wallet Kit
+
+A "identidade" do eleitor. Este é o componente que conecta o Front-end ao Contrato de forma segura.
+
+* **Autenticação:** O usuário se conecta ao dApp usando o botão "Conectar Carteira", que já vem integrado ao scaffold.
+* **Assinatura de Transação:** Quando o usuário clica em "Votar", o front-end usa os *hooks* (`useContractWrite`) do scaffold. Esses hooks automaticamente:
+    1.  Pedem ao **Stellar Wallet Kit** para abrir um pop-up.
+    2.  Solicitam que o usuário **assine** a transação, confirmando seu voto.
+    3.  Enviam essa transação assinada para a função `vote()` do nosso contrato.
+
+O contrato então valida a assinatura (via `env.invoker()`) e processa o voto, completando o ciclo de forma segura e descentralizada.
+
+---
+
+## 💻 Tech Stack
+
+* **Framework:** Scaffold Stellar
+* **Smart Contract:** Rust, Soroban
+* **Front-End:** React, TypeScript, Vite
+* **Conexão:** Stellar Wallet Kit
+* **Estilização:** CSS Padrão (do Scaffold)
+
+---
+
+## 🛠️ Como Executar Localmente
+
+Este projeto usa a estrutura padrão do `scaffold-stellar`.
+
+### Pré-requisitos
+
+* Rust
+* Soroban CLI
+* Node.js (v18+)
+
+### Instalação
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone [URL-DO-SEU-REPOSITÓRIO-GIT]
+    cd votastellar
+    ```
+
+2.  **Instale as dependências (raiz):**
+    ```bash
+    npm install
+    ```
+
+3.  **Compile o Contrato:**
+    ```bash
+    (na pasta raiz)
+    npm run contract:build
+    ```
+
+4.  **Rode o dApp (Contrato + Front-End):**
+    ```bash
+    (na pasta raiz)
+    npm run dev
+    ```
+
+Isso iniciará o front-end em `http://localhost:5173` e rodará uma rede local de testes simultaneamente.
+
+---
+
+## 🗺️ Próximos Passos (Roadmap)
+
+Dado o tempo limitado, focamos no MVP "MUST HAVE". Os próximos passos (backlog "SHOULD" e "COULD") incluiriam:
+
+* **Feedback de UI:** Mostrar mensagens claras de "loading" e "erro" (ex: "Você já votou!").
+* **Status de Voto:** Desabilitar os botões de voto se o `useContractRead` detectar que a carteira conectada já votou.
+* **Criação de Enquetes:** Adicionar uma função `create_poll()` para que qualquer usuário possa criar sua própria enquete.
+* **Prazos (Deadline):** Adicionar um `timestamp` no contrato para que as votações se encerrem automaticamente.
