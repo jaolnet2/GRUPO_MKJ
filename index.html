@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VotaStellar - Enquetes com Transparência Verificada</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts (Urbanist - como no pitch) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Aplicando a fonte Urbanist como padrão */
+        body {
+            font-family: 'Urbanist', sans-serif;
+        }
+        
+        /* Cor de destaque (o verde-limão tecnológico do pitch) */
+        .highlight {
+            color: #deff9a;
+        }
+        
+        /* Botão Primário */
+        .btn-primary {
+            @apply bg-lime-300 text-gray-900 font-bold py-3 px-6 rounded-lg transition-transform hover:scale-105 hover:bg-lime-200;
+        }
+        
+        /* Botão Secundário */
+        .btn-secondary {
+            @apply border border-lime-300 text-lime-300 font-bold py-3 px-6 rounded-lg transition-transform hover:scale-105 hover:bg-lime-300 hover:text-gray-900;
+        }
+        
+        /* Efeito de grade sutil no fundo (como no pitch) */
+        .bg-grid {
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        /* Tiles de Recursos */
+        .feature-tile {
+            @apply bg-gray-900 p-8 rounded-xl border border-gray-800 transition-all hover:border-lime-300 hover:shadow-2xl hover:shadow-lime-500/10;
+        }
+    </style>
+</head>
+<body class="bg-gray-950 text-gray-300 antialiased bg-grid">
+
+    <!-- ==== Header ==== -->
+    <header class="fixed top-0 left-0 w-full bg-gray-950/80 backdrop-blur-md z-50 border-b border-gray-800">
+        <nav class="container mx-auto max-w-7xl px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="text-3xl font-bold text-white">
+                Vota<span class="highlight">Stellar</span>
+            </a>
+            
+            <!-- Menu Desktop -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#problema" class="hover:text-lime-300 transition-colors">O Problema</a>
+                <a href="#solucao" class="hover:text-lime-300 transition-colors">Solução</a>
+                <a href="#pro" class="hover:text-lime-300 transition-colors">Recursos Pro</a>
+                <a href="#cta" class="btn-primary ml-4 !px-5 !py-2">Começar Agora</a>
+            </div>
+            
+            <!-- Botão Mobile -->
+            <button id="mobile-menu-btn" class="md:hidden text-white text-2xl z-50">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </nav>
+        
+        <!-- Menu Mobile (Dropdown) -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-0 left-0 w-full h-screen bg-gray-950 flex flex-col items-center justify-center space-y-8 text-2xl">
+            <a href="#problema" class="hover:text-lime-300 transition-colors">O Problema</a>
+            <a href="#solucao" class="hover:text-lime-300 transition-colors">Solução</a>
+            <a href="#pro" class="hover:text-lime-300 transition-colors">Recursos Pro</a>
+            <a href="#cta" class="btn-primary mt-8">Começar Agora</a>
+        </div>
+    </header>
+
+    <!-- ==== Hero Section ==== -->
+    <main class="w-full">
+        <section class="container mx-auto max-w-7xl px-6 pt-40 pb-20 md:pt-48 md:pb-32 flex flex-col md:flex-row items-center gap-12">
+            <!-- Coluna de Texto -->
+            <div class="w-full md:w-1/2 text-center md:text-left">
+                <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight">
+                    Enquetes com <span class="highlight">Confiança Verificada</span>.
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-400 mt-6 max-w-xl">
+                    Crie, gerencie e participe de votações 100% on-chain na rede Stellar. Transparência total, sem bots, sem censura.
+                </p>
+                <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#cta" class="btn-primary">Criar minha Enquete</a>
+                    <a href="#problema" class="btn-secondary">Entenda o Problema</a>
+                </div>
+            </div>
+            
+            <!-- Coluna Visual (Mockup) -->
+            <div class="w-full md:w-1/2">
+                <img src="https://placehold.co/800x600/1a1a1a/deff9a?text=VotaStellar+App+UI" alt="Interface do VotaStellar" class="rounded-xl shadow-2xl shadow-lime-500/10 border border-gray-800">
+            </div>
+        </section>
+
+        <!-- ==== Problema Section ==== -->
+        <section id="problema" class="py-20 bg-gray-900/50">
+            <div class="container mx-auto max-w-7xl px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-white text-center">O Mercado de Opinião Está <span class="highlight">Quebrado</span></h2>
+                <p class="text-lg text-gray-400 text-center mt-4 max-w-2xl mx-auto">
+                    Plataformas centralizadas falham em garantir o básico: confiança.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+                    <!-- Card Problema 1 -->
+                    <div class="feature-tile text-center">
+                        <i class="fa-solid fa-user-shield text-lime-300 text-4xl mb-4"></i>
+                        <h3 class="text-2xl font-bold text-white mb-2">Manipulação de Bots</h3>
+                        <p>Enquetes tradicionais são inundadas por bots e contas falsas, distorcendo resultados cruciais.</p>
+                    </div>
+                    <!-- Card Problema 2 -->
+                    <div class="feature-tile text-center">
+                        <i class="fa-solid fa-eye-slash text-lime-300 text-4xl mb-4"></i>
+                        <h3 class="text-2xl font-bold text-white mb-2">Resultados Opacos</h3>
+                        <p>Você não pode auditar os votos. A plataforma exige confiança cega, sem NENHUMA prova verificável.</p>
+                    </div>
+                    <!-- Card Problema 3 -->
+                    <div class="feature-tile text-center">
+                        <i class="fa-solid fa-ban text-lime-300 text-4xl mb-4"></i>
+                        <h3 class="text-2xl font-bold text-white mb-2">Censura e Controle</h3>
+                        <p>O administrador pode remover enquetes, alterar opções ou banir tópicos que não se alinham com seus interesses.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==== Solução Section ==== -->
+        <section id="solucao" class="py-20 md:py-32">
+            <div class="container mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center gap-12 md:gap-20">
+                <!-- Coluna Visual -->
+                <div class="w-full md:w-1/2">
+                    <!--  -->
+                    <img src="https://placehold.co/800x700/1a1a1a/deff9a?text=Blockchain+Auditável" alt="Rede de blockchain segura" class="rounded-xl shadow-2xl shadow-lime-500/10 border border-gray-800">
+                </div>
+                <!-- Coluna de Texto -->
+                <div class="w-full md:w-1/2">
+                    <span class="text-lime-300 font-bold uppercase tracking-wider">A SOLUÇÃO</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mt-4 mb-6">Resultados On-Chain. <br>Confiança In-App.</h2>
+                    <p class="text-lg text-gray-400 mb-8">
+                        VotaStellar move a lógica da votação para a blockchain Soroban (Stellar), tornando a trapaça criptograficamente impossível.
+                    </p>
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4">
+                            <i class="fa-solid fa-file-contract text-lime-300 text-2xl mt-1"></i>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Totalmente Auditável</h3>
+                                <p>Cada voto é uma transação pública. Qualquer um pode verificar o resultado final, eliminando a necessidade de confiança.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <i class="fa-solid fa-wallet text-lime-300 text-2xl mt-1"></i>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Segurança "Um-Voto-Por-Carteira"</h3>
+                                <p>Nossa regra de negócio é garantida pelo contrato. Uma carteira só pode votar uma vez, impedindo ataques de bots.</p>
+                            </div>
+                        </li>
+                         <li class="flex items-start gap-4">
+                            <i class="fa-solid fa-rocket text-lime-300 text-2xl mt-1"></i>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Rápido e Barato</h3>
+                                <p>Construído na Stellar, as transações são confirmadas em segundos e custam uma fração de centavo. Perfeito para votações em escala.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==== Recursos PRO Section ==== -->
+        <section id="pro" class="py-20 bg-gray-900/50">
+            <div class="container mx-auto max-w-7xl px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-white text-center">Feito para a <span class="highlight">Próxima Geração</span> de Comunidades</h2>
+                <p class="text-lg text-gray-400 text-center mt-4 max-w-2xl mx-auto">
+                    De um MVP à plataforma de governança líder. Nossos recursos Pro são focados em DAOs, marcas e criadores.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+                    <!-- Feature Pro 1 -->
+                    <div class="feature-tile">
+                        <i class="fa-solid fa-ticket text-lime-300 text-4xl mb-4"></i>
+                        <h3 class="text-2xl font-bold text-white mb-2">Token-Gating</h3>
+                        <p>Crie enquetes exclusivas para detentores do seu NFT ou Token. A ferramenta perfeita para governança de DAOs e engajamento de comunidades Web3.</p>
+                    </div>
+                    <!-- Feature Pro 2 -->
+                    <div class="feature-tile">
+                        <i class="fa-solid fa-gas-pump text-lime-300 text-4xl mb-4"></i>
+                        <h3 class="text-2xl font-bold text-white mb-2">Votação "Gasless"</h3>
+                        <p>Patrocine as taxas de transação. Seus usuários votam com um único clique, sem atrito, removendo a complexidade do "gas" da experiência.</p>
+                    </div>
+                    <!-- Feature Pro 3 -->
+                    <div class="feature-tile">
+                        <i class="fa-solid fa-code text-lime-300 text-4xl mb-4"></i>
+                        <h3 class="text-2xl font-bold text-white mb-2">Widgets "Embeddable"</h3>
+                        <p>Leve sua enquete para onde seus usuários estão. Incorpore votações VotaStellar diretamente no seu site, blog ou app com uma linha de código.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==== CTA Section ==== -->
+        <section id="cta" class="py-20 md:py-32">
+            <div class="container mx-auto max-w-3xl px-6 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold text-white">
+                    Pronto para Criar Enquetes que Geram <span class="highlight">Confiança</span>?
+                </h2>
+                <p class="text-xl text-gray-400 mt-6 mb-10">
+                    Comece gratuitamente hoje mesmo. Do nosso MVP de 50 minutos à sua próxima grande decisão de governança, estamos aqui para provar cada voto.
+                </p>
+                <a href="#" class="btn-primary text-lg">Comece a Criar Gratuitamente</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==== Footer ==== -->
+    <footer class="border-t border-gray-800 bg-gray-950">
+        <div class="container mx-auto max-w-7xl px-6 py-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="text-center md:text-left mb-4 md:mb-0">
+                <a href="#" class="text-2xl font-bold text-white">
+                    Vota<span class="highlight">Stellar</span>
+                </a>
+                <p class="text-sm text-gray-500">© 2025 VotaStellar. Todos os direitos reservados.</p>
+            </div>
+            <div class="flex space-x-6 text-gray-400">
+                <a href="#" class="hover:text-lime-300"><i class="fa-brands fa-twitter text-2xl"></i></a>
+                <a href="#" class="hover:text-lime-300"><i class="fa-brands fa-discord text-2xl"></i></a>
+                <a href="#" class="hover:text-lime-300"><i class="fa-brands fa-github text-2xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script para Menu Mobile -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeIcon = '<i class="fa-solid fa-times"></i>';
+            const openIcon = '<i class="fa-solid fa-bars"></i>';
+            let isOpen = false;
+
+            const toggleMenu = () => {
+                isOpen = !isOpen;
+                mobileMenu.classList.toggle('hidden');
+                menuBtn.innerHTML = isOpen ? closeIcon : openIcon;
+                document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+            };
+            
+            menuBtn.addEventListener('click', toggleMenu);
+
+            // Fecha o menu se um link for clicado
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (isOpen) {
+                        toggleMenu();
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
